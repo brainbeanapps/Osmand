@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 // Global Parameters accepted
 // TARGET_APP_NAME    - app name
@@ -61,15 +61,16 @@ android {
 		warningsAsErrors false
 	}
 
-	bundle {
-		language {
-			// Specifies that the app bundle should not support
-			// configuration APKs for language resources. These
-			// resources are instead packaged with each base and
-			// dynamic feature APK.
-			enableSplit = false
-		}
-	}
+	// not accessible in libraries, only in applications
+//	bundle {
+//		language {
+//			// Specifies that the app bundle should not support
+//			// configuration APKs for language resources. These
+//			// resources are instead packaged with each base and
+//			// dynamic feature APK.
+//			enableSplit = false
+//		}
+//	}
 
 	// related to kuromoji
 	//packagingOptions {
@@ -162,39 +163,39 @@ android {
 		// Version
 		freedev {
 			dimension "version"
-			applicationId "net.osmand.dev"
+//			applicationId "net.osmand.dev"
 			// resConfig "en"
 		}
 		free {
 			dimension "version"
-			applicationId "net.osmand"
+//			applicationId "net.osmand"
 		}
 		freeres {
 			dimension "version"
-			applicationId "net.osmand"
+//			applicationId "net.osmand"
 			resConfig "en"
 		}
 		freecustom {
 			dimension "version"
-			applicationId "net.osmand.freecustom"
+//			applicationId "net.osmand.freecustom"
 		}
 		full {
 			dimension "version"
-			applicationId "net.osmand.plus"
+//			applicationId "net.osmand.plus"
 		}
         fulldev {
             dimension "version"
-            applicationId "net.osmand.plus"
+//            applicationId "net.osmand.plus"
             resConfig "en"
             //resConfigs "xxhdpi", "nodpi"
         }
 		huawei {
 			dimension "version"
-			applicationId "net.osmand.plus.huawei"
+//			applicationId "net.osmand.plus.huawei"
 		}
 		freehuawei {
 			dimension "version"
-			applicationId "net.osmand.huawei"
+//			applicationId "net.osmand.huawei"
 		}
 
 		// CoreVersion
@@ -439,7 +440,8 @@ task cleanupDuplicatesInCore() {
 	}
 }
 afterEvaluate {
-	android.applicationVariants.all { variant ->
+//	android.applicationVariants.all { variant ->
+	android.libraryVariants.all { variant ->
 		variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
 	}
 }
